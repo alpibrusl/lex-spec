@@ -12,13 +12,16 @@
 #                       A2A consumers treat this as Deny at the
 #                       trust boundary.
 #
-# Effects: none. Pure fold over the AST.
+# Effects: none for eval. eval_and_log adds [sql, time] for trail.
 
 import "std.str"  as str
 
 import "./spec" as sp
 
-# ---- Public entry point -------------------------------------------
+import "lex-trail/log"   as trail
+import "lex-trail/kinds" as kinds
+
+# ---- Public entry points ------------------------------------------
 
 fn eval(
   spec :: sp.Spec,
@@ -30,6 +33,31 @@ fn eval(
     EvalBool(false) => Deny(str.concat("predicate false: ", sp.show_expr(spec.predicate))),
     EvalInc(why)    => Inconclusive(why),
     EvalVal(_)      => Inconclusive("predicate did not reduce to Bool"),
+  }
+}
+
+fn eval_and_log(
+  spec     :: sp.Spec,
+  bindings :: List[(Str, sp.SpecValue)],
+  log      :: trail.Log,
+  parent   :: Option[Str],
+) -> [sql, time] sp.Verdict {
+  let verdict      := eval(spec, bindings)
+  let kind         := match verdict { Allow => kinds.spec_allowed(), _ => kinds.spec_denied() }
+  let payload      := spec_payload(spec.name, verdict)
+  let trail_result := trail.append(log, kind, parent, payload)
+  verdict
+}
+
+fn spec_payload(spec_name :: Str, verdict :: sp.Verdict) -> Str
+  examples {
+    spec_payload("my_spec", Allow) => "{\"spec\":\"my_spec\"}",
+  }
+{
+  match verdict {
+    Allow => str.join(["{\"spec\":\"", spec_name, "\"}"], ""),
+    _     => str.join(["{\"spec\":\"", spec_name,
+      "\",\"reason\":\"", sp.verdict_reason(verdict), "\"}"], ""),
   }
 }
 
