@@ -5,4 +5,4 @@ description = "Capability-precondition + spec DSL for Lex — Spec ADT, evaluato
 
 [dependencies]
 lex-schema = { path = "../lex-schema" }
-"lex-trail" = { path = "../lex-trail" }
+lex-trail = { path = "../lex-trail" }
