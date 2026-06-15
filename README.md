@@ -1,5 +1,9 @@
 # lex-spec
 
+[![CI](https://github.com/alpibrusl/lex-spec/actions/workflows/ci.yml/badge.svg)](https://github.com/alpibrusl/lex-spec/actions/workflows/ci.yml)
+
+**Part of the [Lex](https://lexlang.org) project** — Substrate · [Manifesto](https://lexlang.org/manifesto) · [All packages](https://lexlang.org)
+
 A **capability-precondition + spec DSL** for [lex-lang](https://github.com/alpibrusl/lex-lang),
 written in pure Lex. Same evaluator, same DSL, same property check, same
 SMT-LIB export — wired through the A2A `Capability` shape that
