@@ -4,5 +4,5 @@ version     = "0.1.0"
 description = "Capability-precondition + spec DSL for Lex — Spec ADT, evaluator, randomized property check, SMT-LIB export."
 
 [dependencies]
-lex-schema = { path = "../../generic/lex-schema" }
-lex-trail  = { path = "../lex-trail" }
+lex-schema = { git = "https://github.com/alpibrusl/lex-schema" }
+lex-trail  = { git = "https://github.com/alpibrusl/lex-trail" }
