@@ -1,6 +1,7 @@
 [package]
 name        = "lex-spec"
 version     = "0.1.0"
+lex         = "0.10.0"
 description = "Capability-precondition + spec DSL for Lex — Spec ADT, evaluator, randomized property check, SMT-LIB export."
 
 [dependencies]
