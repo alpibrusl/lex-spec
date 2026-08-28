@@ -191,8 +191,8 @@ revisit each.
 
 ## License
 
-EUPL-1.2 — matches the parent `lex-lang` project.
 
----
+Copyright (c) 2026 lex-spec contributors.
 
-Built under the principles of [Trust Without Comprehension](https://lexlang.org/manifesto).
+Licensed under the [EUPL-1.2](LICENSE) — the European Union Public Licence, as used across the `lex-*` ecosystem.
+
